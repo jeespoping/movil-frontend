@@ -1,0 +1,26 @@
+@import "../../SCSS/index.scss";
+
+.crear {
+  position: relative;
+  background-color: $background-grey-dark;
+  width: 500px;
+  z-index: 1;
+  padding: 50px 70px;
+  border-radius: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+
+  &__title {
+    text-align: center;
+    color: $font-light;
+  }
+
+  .ui.button.submit {
+    margin-top: 20px;
+  }
+
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }
+}
