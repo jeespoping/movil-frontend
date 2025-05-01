@@ -1,0 +1,11 @@
+@import "../../SCSS/index.scss";
+
+.list-moviles {
+  padding: 20px;
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}

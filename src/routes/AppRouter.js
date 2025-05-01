@@ -12,10 +12,9 @@ import {
 import { logout } from "../reducers/authReducer";
 import { getMe, reLogin } from "../actions/auth";
 import ProtectedRoute from "./ProtectedRoute";
+import ListMovilAdmin from "../pages/ListMovilAdmin";
 
 export default function AppRouter() {
-  const { loading, isAuthenticated } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,6 +52,10 @@ export default function AppRouter() {
           <Route
             path="/crear"
             element={<ProtectedRoute element={<Crear />} />}
+          />
+          <Route
+            path="/list-admin"
+            element={<ProtectedRoute element={<ListMovilAdmin />} />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

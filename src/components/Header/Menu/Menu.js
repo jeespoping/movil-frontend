@@ -84,6 +84,12 @@ function MenuOptions({ user, onShowModal, handleLogout }) {
                     Crear producto
                   </Menuweb.Item>
                 </NavLink>
+                <NavLink to="/list-admin" end>
+                  <Menuweb.Item>
+                    <Icon name="mobile" />
+                    Lista de productos
+                  </Menuweb.Item>
+                </NavLink>
               </>
             )}
 
