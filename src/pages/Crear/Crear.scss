@@ -16,8 +16,42 @@
     color: $font-light;
   }
 
+  .movil-form {
+    &__miniature {
+      margin-bottom: 16px;
+
+      > div {
+        width: 100%;
+        min-height: 120px;
+        border: 2px dashed $primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          opacity: 0.6;
+          cursor: pointer;
+        }
+      }
+
+      > .ui.image {
+        width: 100%;
+        min-height: 120px;
+        margin: 0;
+        border: 2px dashed $primary;
+        padding: 5px;
+        &:hover {
+          opacity: 0.6;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
   .ui.button.submit {
-    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px !important;
   }
 
   @media screen and (max-width: 992px) {

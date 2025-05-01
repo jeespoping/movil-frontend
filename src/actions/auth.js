@@ -13,7 +13,7 @@ export const loginActions = (formData) => async (dispatch) => {
     const response = await login(formData);
 
     dispatch(loginSuccess(response));
-    setAccesToken(response.accessToken);
+    setAccesToken(response.access);
     setRefreshToken(response.refresh);
 
     return response;

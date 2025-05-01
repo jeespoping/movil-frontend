@@ -23,7 +23,12 @@ export default function AppRouter() {
       const accessToken = getAccesToken();
       const refreshToken = getRefreshToken();
 
-      if (!accessToken || !refreshToken) {
+      if (
+        !accessToken ||
+        !refreshToken ||
+        accessToken === "undefined" ||
+        refreshToken === "undefined"
+      ) {
         dispatch(logout());
         return;
       }
