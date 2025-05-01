@@ -3,13 +3,23 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Form } from "semantic-ui-react";
 import "./LoginForm.scss";
+import { loginActions } from "../../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginForm({ showRegisterForm, onCloseModal }) {
+  const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.auth);
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      console.log(formData);
+      const response = await dispatch(loginActions(formData));
+
+      if (response) {
+        onCloseModal();
+      }
     },
   });
 
@@ -30,11 +40,16 @@ export default function LoginForm({ showRegisterForm, onCloseModal }) {
         error={formik.errors.password}
       />
       <div className="actions">
-        <Button type="button" basic onClick={showRegisterForm}>
+        <Button
+          loading={loading}
+          type="button"
+          basic
+          onClick={showRegisterForm}
+        >
           Registrarse
         </Button>
         <div>
-          <Button className="submit" type="submit">
+          <Button loading={loading} className="submit" type="submit">
             Entrar
           </Button>
         </div>

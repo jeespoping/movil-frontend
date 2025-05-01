@@ -23,6 +23,7 @@ const authSlice = createSlice({
     loginFailure: (state) => {
       state.token = null;
       state.isAuthenticated = false;
+      state.loading = false;
     },
     logout: (state) => {
       state.token = null;

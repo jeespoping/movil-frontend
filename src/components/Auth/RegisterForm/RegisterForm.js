@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Form } from "semantic-ui-react";
 import "../LoginForm/LoginForm.scss";
+import { register } from "../../../api/auth";
 
 export default function RegisterForm({ showLoginForm }) {
+  const [loading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: initialValue(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      console.log(formData);
+      setLoading(true);
+      const response = await register(formData);
+
+      if (response) {
+        showLoginForm();
+      }
+
+      setLoading(false);
     },
   });
 
@@ -45,10 +55,10 @@ export default function RegisterForm({ showLoginForm }) {
       />
 
       <div className="actions">
-        <Button onClick={showLoginForm} type="button">
+        <Button loading={loading} onClick={showLoginForm} type="button">
           Iniciar sesion
         </Button>
-        <Button className="submit" type="submit">
+        <Button loading={loading} className="submit" type="submit">
           Registrar
         </Button>
       </div>
