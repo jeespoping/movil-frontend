@@ -45,7 +45,7 @@ export function MovilItem({ movil, onReload }) {
             loading={loading}
             icon
             as="a"
-            href={movil.url}
+            href={`/movil/${movil.url}`}
             target="_blank"
           >
             <Icon name="eye" />
