@@ -10,11 +10,13 @@ import { Grid, Image, Pagination } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { map } from "lodash";
 
-export function ListMoviles({ moviles, pagination, setPage }) {
+export function ListMoviles({ moviles, pagination, setPage, paginate }) {
   const { width } = useWindowSize();
 
   const changePage = (_, data) => {
-    setPage(data.activePage);
+    if (paginate) {
+      setPage(data.activePage);
+    }
   };
 
   const getColumnsRender = () => {
@@ -40,21 +42,28 @@ export function ListMoviles({ moviles, pagination, setPage }) {
         </Grid.Row>
       </Grid>
 
-      <div className="list-moviles__pagination">
-        <Pagination
-          totalPages={pagination.pages}
-          defaultActivePage={pagination.page}
-          ellipsisItem={null}
-          firstItem={null}
-          lastItem={null}
-          onPageChange={changePage}
-        />
-      </div>
+      {paginate && (
+        <div className="list-moviles__pagination">
+          <Pagination
+            totalPages={pagination.pages}
+            defaultActivePage={pagination.page}
+            ellipsisItem={null}
+            firstItem={null}
+            lastItem={null}
+            onPageChange={changePage}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
 function Movil({ movil }) {
+  const formattedPrice =
+    movil.price.toLocaleString("es-CO", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }) + " COP";
   return (
     <Grid.Column className="list-moviles__movil">
       <div className="list-moviles__movil-poster">
@@ -65,7 +74,7 @@ function Movil({ movil }) {
           />
         </NavLink>
         <div className="list-moviles__movil-poster-info">
-          <span className="price">{movil.price}€</span>
+          <span className="price">{formattedPrice}</span>
         </div>
       </div>
       <h2>{movil.title}</h2>

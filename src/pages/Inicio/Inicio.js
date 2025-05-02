@@ -35,6 +35,7 @@ export default function Inicio() {
           moviles={moviles}
           pagination={pagination}
           setPage={setPage}
+          paginate={true}
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import Inicio from "../pages/Inicio";
 import Crear from "../pages/Crear";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getAccesToken,
   getRefreshToken,
@@ -13,6 +13,10 @@ import { logout } from "../reducers/authReducer";
 import { getMe, reLogin } from "../actions/auth";
 import ProtectedRoute from "./ProtectedRoute";
 import ListMovilAdmin from "../pages/ListMovilAdmin";
+import Movil from "../pages/Movil/Movil";
+import Cart from "../pages/Cart";
+import { getCart } from "../utils/cart";
+import { addProductCart } from "../reducers/cartReducer";
 
 export default function AppRouter() {
   const dispatch = useDispatch();
@@ -21,6 +25,7 @@ export default function AppRouter() {
     (async () => {
       const accessToken = getAccesToken();
       const refreshToken = getRefreshToken();
+      const cartLocal = getCart();
 
       if (
         !accessToken ||
@@ -41,6 +46,10 @@ export default function AppRouter() {
       } else {
         await dispatch(getMe());
       }
+
+      if (cartLocal && accessToken) {
+        dispatch(addProductCart({ product: cartLocal }));
+      }
     })();
   }, [dispatch]);
 
@@ -56,6 +65,11 @@ export default function AppRouter() {
           <Route
             path="/list-admin"
             element={<ProtectedRoute element={<ListMovilAdmin />} />}
+          />
+          <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
+          <Route
+            path="/movil/:url"
+            element={<PublicRoute element={<Movil />} />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

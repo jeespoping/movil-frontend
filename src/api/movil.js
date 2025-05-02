@@ -12,6 +12,30 @@ export const getMoviles = async () => {
   }
 };
 
+export const getMovil = async (url) => {
+  try {
+    const { data } = await httpSinToken(`/movil/${url}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+
+    return null;
+  }
+};
+
+export const searchMovil = async (q) => {
+  try {
+    const { data } = await httpSinToken(`/movil/search?q=${q}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+
+    return null;
+  }
+};
+
 export const createMovil = async (formValue) => {
   try {
     const formData = new FormData();

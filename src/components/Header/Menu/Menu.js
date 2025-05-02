@@ -6,14 +6,13 @@ import {
   Label,
   Menu as Menuweb,
 } from "semantic-ui-react";
-import { brands } from "../../../helpers/staticData";
 import { NavLink } from "react-router-dom";
-import { map } from "lodash";
 import "./Menu.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../reducers/authReducer";
 import ModalBasic from "../../ModalBasic";
 import Auth from "../../Auth/Auth";
+import { size } from "lodash";
 
 export default function Menu() {
   const { user } = useSelector((state) => state.auth);
@@ -34,10 +33,7 @@ export default function Menu() {
     <div className="menu">
       <Container>
         <Grid>
-          <Grid.Column width={6} className="menu__left">
-            <MenuPlatforms brands={brands} />
-          </Grid.Column>
-          <Grid.Column width={10} className="menu__right">
+          <Grid.Column width={16} className="menu__right">
             <MenuOptions
               onShowModal={onShowModal}
               user={user}
@@ -58,19 +54,9 @@ export default function Menu() {
   );
 }
 
-function MenuPlatforms({ brands }) {
-  return (
-    <Menuweb>
-      {map(brands, (brand) => (
-        <NavLink href={`/games/${brand.url}`} key={brand.id} end>
-          <Menuweb.Item name={brand.url}>{brand.title}</Menuweb.Item>
-        </NavLink>
-      ))}
-    </Menuweb>
-  );
-}
-
 function MenuOptions({ user, onShowModal, handleLogout }) {
+  const { cart } = useSelector((state) => state.cart);
+
   return (
     <Menuweb>
       <>
@@ -94,12 +80,14 @@ function MenuOptions({ user, onShowModal, handleLogout }) {
             )}
 
             <NavLink to="/cart" end>
-              <Menuweb.Item className="m-0">
+              <Menuweb.Item className="i-center">
                 <Icon name="cart" />
 
-                <Label color="red" floating circular>
-                  2
-                </Label>
+                {size(cart?.split(",")) > 0 && (
+                  <Label color="red" floating circular>
+                    {size(cart.split(","))}
+                  </Label>
+                )}
               </Menuweb.Item>
             </NavLink>
 
