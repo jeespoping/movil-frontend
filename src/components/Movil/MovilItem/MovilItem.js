@@ -33,9 +33,7 @@ export function MovilItem({ movil, onReload }) {
     <>
       <div className="movil-item">
         <div className="movil-item__info">
-          <Image
-            src={`${process.env.REACT_APP_BASE_PATH}/${movil.miniature}`}
-          />
+          <Image src={product.miniature} />
           <div>
             <p>{movil.title}</p>
           </div>

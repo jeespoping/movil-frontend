@@ -68,10 +68,7 @@ function Movil({ movil }) {
     <Grid.Column className="list-moviles__movil">
       <div className="list-moviles__movil-poster">
         <NavLink to={`/movil/${movil.url}`} end>
-          <Image
-            src={`${process.env.REACT_APP_BASE_PATH}/${movil.miniature}`}
-            alt={movil.title}
-          />
+          <Image src={product.miniature} alt={movil.title} />
         </NavLink>
         <div className="list-moviles__movil-poster-info">
           <span className="price">{formattedPrice}</span>

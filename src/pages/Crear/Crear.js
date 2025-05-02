@@ -46,7 +46,7 @@ export default function Crear({ course }) {
     if (formik.values.file) {
       return formik.values.miniature;
     } else if (formik.values.miniature) {
-      return `${process.env.REACT_APP_BASE_PATH}/${formik.values.miniature}`;
+      return formik.values.miniature;
     }
     return null;
   };

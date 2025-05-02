@@ -54,7 +54,7 @@ function Search() {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " COP",
-          image: `${process.env.REACT_APP_BASE_PATH}/${movil.miniature}`,
+          image: movil.miniature,
           url: movil.url,
         }))
       );

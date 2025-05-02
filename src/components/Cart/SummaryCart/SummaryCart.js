@@ -56,10 +56,7 @@ export default function SummaryCart({ products, reloadCart, setReloadCart }) {
                     link
                     onClick={() => removeProduct(product.url)}
                   />
-                  <Image
-                    src={`${process.env.REACT_APP_BASE_PATH}/${product.miniature}`}
-                    alt={product.title}
-                  />
+                  <Image src={product.miniature} alt={product.title} />
                   {product.title}
                 </Table.Cell>
                 <Table.Cell>{getBrand(product.brand)}</Table.Cell>
