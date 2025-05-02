@@ -62,7 +62,7 @@ export default function Crear({ course }) {
       <h1 className="crear__title">Crear movil</h1>
       <Form className="movil-form" onSubmit={formik.handleSubmit}>
         <div className="movil-form__miniature" {...getRootProps()}>
-          <input {...getInputProps()} />
+          <input data-cy="input-miniature" {...getInputProps()} />
           {getMiniature() ? (
             <Image size="small" src={getMiniature()} />
           ) : (

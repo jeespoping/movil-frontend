@@ -14,7 +14,6 @@ const httpConToken = axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${getAccesToken()}`,
   },
 });
 
@@ -22,8 +21,33 @@ const httpConTokenImage = axios.create({
   baseURL,
   headers: {
     "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${getAccesToken()}`,
   },
 });
+
+httpConToken.interceptors.request.use(
+  (config) => {
+    const token = getAccesToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+httpConTokenImage.interceptors.request.use(
+  (config) => {
+    const token = getAccesToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export { httpSinToken, httpConToken, httpConTokenImage };
