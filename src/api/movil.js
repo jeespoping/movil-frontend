@@ -1,8 +1,11 @@
 import { httpConToken, httpConTokenImage, httpSinToken } from "../helpers/http";
 
-export const getMoviles = async () => {
+export const getMoviles = async (params) => {
   try {
-    const { data } = await httpSinToken("/movil");
+    const pageFilter = `page=${params?.page || 1}`;
+    const limitFilter = `limit=${params?.limit || 10}`;
+
+    const { data } = await httpSinToken(`/movil?${pageFilter}&${limitFilter}`);
 
     return data;
   } catch (error) {

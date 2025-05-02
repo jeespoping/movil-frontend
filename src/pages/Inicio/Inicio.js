@@ -11,13 +11,13 @@ export default function Inicio() {
   const [pagination, setPagination] = useState();
   useEffect(() => {
     (async () => {
-      const response = await getMoviles();
+      const response = await getMoviles({ page });
       setMoviles(response.docs);
       setPagination({
         limit: response.limit,
         page: response.page,
-        pages: response.pages,
-        total: response.total,
+        pages: response.totalPages,
+        total: response.totalDocs,
       });
     })();
   }, [page]);
