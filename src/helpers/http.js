@@ -21,7 +21,7 @@ const httpConToken = axios.create({
 const httpConTokenImage = axios.create({
   baseURL,
   headers: {
-    "Content-type": "multipart/form-data",
+    "Content-Type": "multipart/form-data",
     Authorization: `Bearer ${getAccesToken()}`,
   },
 });

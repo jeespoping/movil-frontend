@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import "./Crear.scss";
 import { Button, Dropdown, Form, Image } from "semantic-ui-react";
 import { map } from "lodash";
@@ -6,14 +6,27 @@ import { brands } from "../../helpers/staticData";
 import { useDropzone } from "react-dropzone";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./CrearForm.form";
+import { createMovil } from "../../api/movil";
+import { useNavigate } from "react-router";
 
 export default function Crear({ course }) {
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: initialValues(course),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
-      console.log(formValue);
+      setLoading(true);
+      const response = await createMovil(formValue);
+
+      if (response) {
+        navigate("/list-admin");
+      }
+
+      setLoading(false);
     },
   });
 
@@ -26,6 +39,7 @@ export default function Crear({ course }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
     onDrop,
+    multiple: false,
   });
 
   const getMiniature = () => {
@@ -111,7 +125,7 @@ export default function Crear({ course }) {
           error={formik.errors.brand}
         />
 
-        <Button className="submit" type="submit">
+        <Button className="submit" type="submit" loading={loading}>
           Crear
         </Button>
       </Form>

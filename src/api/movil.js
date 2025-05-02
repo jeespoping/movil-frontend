@@ -1,8 +1,29 @@
-import { httpConToken } from "../helpers/http";
+import { httpConToken, httpConTokenImage } from "../helpers/http";
 
 export const getMoviles = async () => {
   try {
     const { data } = await httpConToken("/movil");
+
+    return data;
+  } catch (error) {
+    console.log(error);
+
+    return null;
+  }
+};
+
+export const createMovil = async (formValue) => {
+  try {
+    const formData = new FormData();
+    Object.keys(formValue).forEach((key) => {
+      formData.append(key, formValue[key]);
+    });
+
+    if (formValue.file) {
+      formData.append("miniature", formValue.file);
+    }
+
+    const { data } = await httpConTokenImage.post("/movil", formData);
 
     return data;
   } catch (error) {

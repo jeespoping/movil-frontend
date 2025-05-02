@@ -23,7 +23,7 @@ export default function ListMovilAdmin() {
     })();
   }, [page]);
 
-  if (!moviles) return <Loader active inline="centered" />;
+  if (!moviles) return <Loader className="loader" active inline="centered" />;
   if (size(moviles) === 0) return "No hay ningun movil";
 
   const changePage = (_, data) => {
