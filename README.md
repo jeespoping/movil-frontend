@@ -1,6 +1,6 @@
 # Proyecto de movil-front
 Este proyecto fue desarrollado en React.
-[Ir al proyecto]([https://movil-frontend.up.railway.app/])
+[Ir al proyecto](https://movil-frontend.up.railway.app/)
 
 ## Versión de node js
 Node 20.11.0
