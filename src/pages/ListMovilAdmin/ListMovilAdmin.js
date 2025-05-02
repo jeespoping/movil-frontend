@@ -9,6 +9,9 @@ export default function ListMovilAdmin() {
   const [moviles, setMoviles] = useState(false);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState();
+  const [reload, setReload] = useState(false);
+
+  const onReload = () => setReload((prevState) => !prevState);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +24,7 @@ export default function ListMovilAdmin() {
         total: response.total,
       });
     })();
-  }, [page]);
+  }, [page, reload]);
 
   if (!moviles) return <Loader className="loader" active inline="centered" />;
   if (size(moviles) === 0) return "No hay ningun movil";
@@ -33,7 +36,7 @@ export default function ListMovilAdmin() {
   return (
     <div className="list-moviles">
       {map(moviles, (movil) => (
-        <MovilItem key={movil.id} movil={movil} />
+        <MovilItem onReload={onReload} key={movil.id} movil={movil} />
       ))}
 
       <div className="list-moviles__pagination">

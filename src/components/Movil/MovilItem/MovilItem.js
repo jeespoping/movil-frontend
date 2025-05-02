@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { Button, Confirm, Icon, Image } from "semantic-ui-react";
 import "./MovilItem.scss";
+import { deleteMovil } from "../../../api/movil";
+import { toast } from "react-toastify";
 
-export function MovilItem({ movil }) {
+export function MovilItem({ movil, onReload }) {
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
 
   const onDelete = async () => {
     try {
-      console.log("Eliminando");
+      setLoading(true);
+
+      const response = await deleteMovil(movil._id);
+
+      if (response) {
+        toast.success("Eliminado correctamente");
+      }
+
+      onReload();
 
       onOpenCloseConfirm();
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -29,10 +41,21 @@ export function MovilItem({ movil }) {
           </div>
         </div>
         <div>
-          <Button icon as="a" href={movil.url} target="_blank">
+          <Button
+            loading={loading}
+            icon
+            as="a"
+            href={movil.url}
+            target="_blank"
+          >
             <Icon name="eye" />
           </Button>
-          <Button icon color="red" onClick={onOpenCloseConfirm}>
+          <Button
+            loading={loading}
+            icon
+            color="red"
+            onClick={onOpenCloseConfirm}
+          >
             <Icon name="trash" />
           </Button>
         </div>

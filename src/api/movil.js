@@ -32,3 +32,14 @@ export const createMovil = async (formValue) => {
     return null;
   }
 };
+
+export const deleteMovil = async (idMovil) => {
+  try {
+    const { data } = await httpConToken.delete(`/movil/${idMovil}`);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
