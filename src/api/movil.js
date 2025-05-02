@@ -1,8 +1,8 @@
-import { httpConToken, httpConTokenImage } from "../helpers/http";
+import { httpConToken, httpConTokenImage, httpSinToken } from "../helpers/http";
 
 export const getMoviles = async () => {
   try {
-    const { data } = await httpConToken("/movil");
+    const { data } = await httpSinToken("/movil");
 
     return data;
   } catch (error) {
