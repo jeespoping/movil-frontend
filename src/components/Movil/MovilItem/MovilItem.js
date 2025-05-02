@@ -33,7 +33,7 @@ export function MovilItem({ movil, onReload }) {
     <>
       <div className="movil-item">
         <div className="movil-item__info">
-          <Image src={product.miniature} />
+          <Image src={movil.miniature} />
           <div>
             <p>{movil.title}</p>
           </div>

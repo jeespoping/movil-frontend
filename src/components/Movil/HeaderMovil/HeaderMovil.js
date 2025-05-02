@@ -10,7 +10,7 @@ export function HeaderMovil({ movil }) {
   return (
     <Grid className="header-movil">
       <Grid.Column mobile={16} tablet={6} computer={5}>
-        <Image src={product.miniature} alt={movil.title} fluid />
+        <Image src={movil.miniature} alt={movil.title} fluid />
       </Grid.Column>
       <Grid.Column mobile={16} tablet={10} computer={11}>
         <Info movil={movil} />
